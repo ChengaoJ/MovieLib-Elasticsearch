@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block main_content %}
+<div class="container">
+	<div class="page">
+		<div class="breadcrumbs">
+			<a href="index.html">Home</a>
+			<a href="/movies">Movie Review</a>
+			<span>{{movie.title}}</span>
+		</div>
+
+		<div class="content">
+			<div class="row">
+				<div class="col-md-6">
+					<figure class="movie-poster"><img src="{{movie.poster}}" alt="#"></figure>
+				</div>
+				<div class="col-md-6">
+					<h2 class="movie-title">{{ movie.title }}</h2>
+					<div class="movie-summary">
+						{{ movie.summary }}
+					</div>
+					<ul class="movie-meta">
+						<li><strong>Rating:</strong>
+							<div class="star-rating" title="Rated {{movie.rating/2}} out of 5"><span style="width:80%"><strong class="rating">{{movie.rating/2}}</strong> out of 5</span></div>
+						</li>
+						<li><strong>Length:</strong> {{movie.time}} min</li>
+						<li><strong>Premiere:</strong> {{movie.release_date}}</li>
+						<li><strong>Category:</strong> {{movie.genre}}</li>
+					</ul>
+
+					<ul class="starring">
+						<li><strong>Creators:</strong> {{movie.creators}}</li>
+						<li><strong>Stars:</strong> {{movie.cast}}</li>
+					</ul>
+				</div>
+			</div> <!-- .row -->
+		</div>
+	</div>
+</div> <!-- .container -->
+{% endblock %}

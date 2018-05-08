@@ -1,0 +1,4 @@
+scrapy
+elasticsearch
+elasticsearch-dsl
+flask

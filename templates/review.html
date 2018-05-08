@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block main_content %}
+<div class="container">
+	<div class="page">
+		<div class="breadcrumbs">
+			<a href="index.html">Home</a>
+			<span>Movie Review</span>
+		</div>
+
+		<div class="filters">
+			<select onchange="reload_url(this.value)" name="Genre" id="genre" placeholder="Choose Category">
+				<option {% if not genre %} selected {% endif %}> Choose Genre </option>
+				{% for g in genres %}
+				<option value="genre={{g}}" {% if g == genre %} selected {% endif %}>{{ g }}</option>
+				{% endfor %}
+			</select>
+			<select name="sort" id="sort" onchange="reload_url(this.value)">
+                <option {% if not sort %} selected {% endif %}> Sort By</option>
+				<option value="sort=-rating" {% if sort=="-rating" %} selected {% endif %}>Highest Rating</option>
+				<option value="sort=-release_date" {% if sort=="-release_date" %} selected {% endif %}>Newest</option>
+				<option value="sort=release_date" {% if sort=="release_date" %} selected {% endif %}>Oldest</option>
+			</select>
+		</div>
+		<div class="movie-list">
+			{% for movie in movies %}
+			<div class="movie">
+				<figure class="movie-poster"><img src="{{ movie.poster }}" alt="#"></figure>
+				<div class="movie-title"><a href="/movie/{{movie.id}}">{{ movie.title }}</a></div>
+			</div>
+			{% endfor %}
+		</div> <!-- .movie-list -->
+
+		<div class="pagination">
+			<a href="{{pages[-2].url}}" class="page-number prev"><i class="fa fa-angle-left"></i></a>
+			<span class="page-number current">{{pages[0].num}}</span>
+			{% for page in pages[1:-2] %}
+			<a href="{{page.url}}" class="page-number">{{page.num}}</a>
+            {% endfor %}
+			<a href="{{pages[-1].url}}" class="page-number next"><i class="fa fa-angle-right"></i></a>
+		</div>
+	</div>
+</div> <!-- .container -->
+{% endblock %}
